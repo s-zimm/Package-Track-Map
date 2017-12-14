@@ -14,7 +14,7 @@ function formSubmit() {
 
 function getUPSdata (tracking) {
     var data = $.ajax({
-        'url': 'https://wwwcie.ups.com/rest/Track',
+        'url': 'http://localhost:3000/https://wwwcie.ups.com/rest/Track',
         'type': 'POST',
         'data': JSON.stringify({
             'UPSSecurity': {
