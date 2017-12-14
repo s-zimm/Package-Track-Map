@@ -61,15 +61,11 @@ function geocode(urlArray) {
     var cityInfo = [];
         
     for (var x = 0; x < urlArray.length; x++) {
-        var data = $.ajax({
-            'url': urlArray[x],
-            'type': "GET",
-        });
-
+        var data = $.get(urlArray[x]);
         var lat = data.results[0].geometry.location.lat;
         var lng = data.results[0].geometry.location.lng;
 
-        console.log(lat);
+        console.log(data);
     }
 }
 
