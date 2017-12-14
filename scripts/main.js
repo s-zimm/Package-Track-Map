@@ -8,15 +8,11 @@ function formSubmit() {
         var serializedArray = $trackingNumberForm.serializeArray();
         var trackingNumber = serializedArray[0].value;
         console.log(`Tracking number: ${trackingNumber}`);
-        return trackingNumber;
+        apiCalls(trackingNumber);
     });
-}
+};
 
-formSubmit();
-
-
-
-function getUPSdata () {
+function getUPSdata (tracking) {
     var data = $.ajax({
         'url': 'http://localhost:3000/https://wwwcie.ups.com/rest/Track',
         'type': 'POST',
@@ -34,7 +30,7 @@ function getUPSdata () {
                     'Request': {
                         'RequestOption':'1'
                     },
-                    'InquiryNumber': '1Z21E02F0328335275'
+                    'InquiryNumber': tracking
                 }
         })
     });
@@ -77,7 +73,11 @@ function loadStoredData () {
 
 // Procedure
 
-getUPSdata()
+function apiCalls(tracking) {
+    getUPSdata(tracking)
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData);
+}
+
+formSubmit();
