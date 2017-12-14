@@ -56,6 +56,28 @@ function transformUpsData (data) {
     return urlArray;
 };
 
+function geocode(urlArray) {
+
+    var cityInfo = [];
+        
+    for (var x = 0; x < urlArray.length; x++) {
+        var data = $.ajax({
+            'url': urlArray[x],
+            'type': "GET",
+        });
+
+        var lat = data.results[0].geometry.location.lat;
+        var lng = data.results[0].geometry.location.lng;
+
+        console.log(lat);
+
+
+
+function storeData (data) {
+    localStorage.setItem(LS_KEY, JSON.stringify(data));
+    return data;
+};
+
 
 
 
@@ -67,11 +89,9 @@ function storeData (data) {
 };
 
 
-
 function loadStoredData () {
     return JSON.parse(localStorage.getItem(LS_KEY));
 };
-
 
 
 // Procedure
@@ -80,8 +100,8 @@ function apiCalls(tracking) {
     getUPSdata(tracking)
     .then(storeData)
     .catch(loadStoredData)
-    .then(transformUpsData);
+    .then(transformUpsData)
+    .then(geocode)
 }
 
 formSubmit();
-
