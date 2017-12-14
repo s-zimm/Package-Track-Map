@@ -14,7 +14,7 @@ function formSubmit() {
 
 function getUPSdata (tracking) {
     var data = $.ajax({
-        'url': 'http://localhost:3000/https://wwwcie.ups.com/rest/Track',
+        'url': 'https://wwwcie.ups.com/rest/Track',
         'type': 'POST',
         'data': JSON.stringify({
             'UPSSecurity': {
@@ -70,7 +70,8 @@ function geocode(urlArray) {
         var lng = data.results[0].geometry.location.lng;
 
         console.log(lat);
-
+    }
+}
 
 
 function storeData (data) {
