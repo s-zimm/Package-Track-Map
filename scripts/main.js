@@ -58,6 +58,7 @@ function transformUpsData (data) {
 
 
 
+
 // storing data offline
 
 function storeData (data) {
@@ -66,9 +67,11 @@ function storeData (data) {
 };
 
 
+
 function loadStoredData () {
     return JSON.parse(localStorage.getItem(LS_KEY));
 };
+
 
 
 // Procedure
@@ -81,3 +84,4 @@ function apiCalls(tracking) {
 }
 
 formSubmit();
+
