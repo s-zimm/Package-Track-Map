@@ -18,14 +18,19 @@ Possibly Node.js if you have trouble connecting to the API.
 You can use the login credentials that we've created, but best practice would be to create your own.
 
 ## Credits
-* [Seth Zimmerman]()
-**built the front-end form and UI|captured the form submission|Made the UPS API functional**
+* [Seth Zimmerman](https://github.com/s-zimm)
+* Built the front-end form and UI
+* Captured the form submission
+* Made the UPS API functional
 * [Alexander Cleoni]()
-**discovered and connected the city/state to longitude/latitude API converter|Completed the transformed the json string into a usable dictionary**
+* Discovered and connected the city/state to longitude/latitude API converter
+* Completed the transformed the json string into a usable dictionary
 * [Andrew Keller]()
-**structured the Google Map API to accept multiple longitude/latitude coordinates and print to the browser.**
-* [Evan Bates]()
-**converted the UPS API into a functional array for the longitude/latitude API converter to leverage|Wrote ReadMe.**
+* Structured the Google Map API to accept multiple longitude/latitude coordinates
+* Printed coordinates to the browser
+* [Evan Bates](https://github.com/ebates92)
+* Converted the UPS API into a functional array for the longitude/latitude API converter to leverage
+* Wrote ReadMe
 
 ## Technologies Used
 
