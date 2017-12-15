@@ -17,10 +17,13 @@
         <form data-form="form">
             <div class="form-group">
                 <label for="tracking-number-input">Tracking Number</label>
-                <input class="form-control" name="tracking-input" id="tracking-number-input"  placeholder="ex. 11A32f3409sLX9">
+                <input class="form-control" name="tracking-input" id="tracking-number-input"  placeholder="ex. 11A32f3409sLX9" data-tracking-number>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
+    </div>
+    <div class="alert alert-danger hide" role="alert" data-alert>
+        Invalid Tracking Number
     </div>
     <div class="map-container">
         <div id="map"></div>
