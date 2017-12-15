@@ -1,5 +1,6 @@
 var LS_KEY = 'ups-data'
 var STATUS;
+var cityInfo = [];
 
 function formSubmit() {
     var $trackingNumberForm = $(`[data-form="form"]`);
@@ -56,24 +57,37 @@ function transformUpsData (data) {
     return urlArray;
 };
 
-// function transformGeocode(data) {
-//     var lat = data.results[0].geometry.location.lat;
-//     var lng = data.results[0].geometry.location.lng;
-// }
+function getGeoCode(url) {
+    return $.get(url);
+}
 
-function getGeocode(urlArray) {
-    var cityInfo = [];
+function pushGeoToArray(data) {
+    // cityInfo = cityInfo.push(data);
+    return pushArray(cityInfo, data);
+}
+
+function pushArray(array, result) {
+    return array.push(result);
+}
+
+function transformGeocode(data) {
+    var resultsArray = [];
+    var info = data;
+    info.forEach(function(position) {
+        resultsArray.push(position.results[0].geometry.location);
+    })
+    console.log(resultsArray);
+    return resultsArray;
+}
+
+function geoLoop(urlArray) {
+    cityInfo = [];
     for (var x = 0; x < urlArray.length; x++) {
         url = urlArray[x];
-        $.get(url, function(data){
-            var results = data;
-            cityInfo.push(results.results[0].geometry.location);
-
-        });
+        cityInfo.push($.get(url)); 
     }
-    // Promise.all(cityInfo);
-    console.log(cityInfo);
-    // return cityInfo;
+    Promise.all(cityInfo)
+        .then(transformGeocode)
 }
 
 
@@ -105,7 +119,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(getGeocode)
+    .then(geoLoop)
 }
 
 formSubmit();
