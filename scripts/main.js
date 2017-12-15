@@ -1,5 +1,6 @@
 var LS_KEY = 'ups-data'
 var STATUS;
+var cityInfo = [];
 
 function formSubmit() {
     var $trackingNumberForm = $(`[data-form="form"]`);
@@ -50,27 +51,44 @@ function transformUpsData (data) {
         if (city === undefined) {
             break;
         };
-        url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city} + ${state}${key}`;
+        url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
         urlArray[x] = url;
     };
     return urlArray;
 };
 
-function geocode(urlArray) {
+function getGeoCode(url) {
+    return $.get(url);
+}
 
-    var cityInfo = [];
-        
+function pushGeoToArray(data) {
+    // cityInfo = cityInfo.push(data);
+    return pushArray(cityInfo, data);
+}
+
+function pushArray(array, result) {
+    return array.push(result);
+}
+
+function transformGeocode(data) {
+    var resultsArray = [];
+    var info = data;
+    info.forEach(function(position) {
+        resultsArray.push(position.results[0].geometry.location);
+    })
+    console.log(resultsArray);
+    return resultsArray;
+}
+
+function geoLoop(urlArray) {
+    cityInfo = [];
     for (var x = 0; x < urlArray.length; x++) {
-        var data = $.ajax({
-            'url': urlArray[x],
-            'type': "GET",
-        });
-
-        var lat = data.results[0].geometry.location.lat;
-        var lng = data.results[0].geometry.location.lng;
-
-        console.log(lat);
-
+        url = urlArray[x];
+        cityInfo.push($.get(url)); 
+    }
+    Promise.all(cityInfo)
+        .then(transformGeocode)
+}
 
 
 function storeData (data) {
@@ -101,7 +119,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(geocode)
+    .then(geoLoop)
 }
 
 formSubmit();
