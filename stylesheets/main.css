@@ -52,7 +52,7 @@ form {
 }
 
 .map-container {
-    margin-top: 45px;
+    margin-top: 62px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +63,11 @@ form {
 #map {
     width: 70%;
     height: 100%;
+}
+
+.map-border {
+    border: 2px solid rgb(202, 200, 200);
+    border-radius: 3px;
 }
 
 .footer {
@@ -77,4 +82,8 @@ form {
 
 .hide {
     display: none;
+}
+
+.move-map {
+    margin-top: 5px;
 }

@@ -39,11 +39,17 @@ function getUPSdata (tracking) {
 
 function transformUpsData (data) {
     var $inputField = $('[data-tracking-number]');
+    var $mapContainer = $('[data-map-container]');
+    var $theMap = $('[data-map]');
     var $alert = $('[data-alert]');
 
     if (data['TrackResponse']) {
+
         $inputField.removeClass('red-border');
+        $mapContainer.removeClass('move-map');
+        $theMap.addClass('map-border');
         $alert.addClass('hide');
+
         var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
         var urlArray = []
         var key = "&key=AIzaSyCBha1IL7d4-v_Y9X8NA_R8Mk0qPHtTo64";
@@ -61,6 +67,8 @@ function transformUpsData (data) {
         return urlArray;
 
     } else {
+
+        $mapContainer.addClass('move-map');
         $inputField.addClass('red-border');
         $alert.removeClass('hide');
         console.log('ERROR!');
