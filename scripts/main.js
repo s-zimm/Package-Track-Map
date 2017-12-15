@@ -38,7 +38,6 @@ function getUPSdata (tracking) {
     return data;
 };
 
-
 function transformUpsData (data) {
     var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
     var urlArray = []
@@ -56,19 +55,6 @@ function transformUpsData (data) {
     };
     return urlArray;
 };
-
-function getGeoCode(url) {
-    return $.get(url);
-}
-
-function pushGeoToArray(data) {
-    // cityInfo = cityInfo.push(data);
-    return pushArray(cityInfo, data);
-}
-
-function pushArray(array, result) {
-    return array.push(result);
-}
 
 function transformGeocode(data) {
     var resultsArray = [];
@@ -97,9 +83,6 @@ function storeData (data) {
     return data;
 };
 
-
-
-
 // storing data offline
 
 function storeData (data) {
@@ -123,6 +106,8 @@ function apiCalls(tracking) {
     .then(geoLoop)
     
 }
+
+// Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
     var markers = [];
