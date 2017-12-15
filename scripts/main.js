@@ -50,23 +50,30 @@ function transformUpsData (data) {
         if (city === undefined) {
             break;
         };
-        url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city} + ${state}${key}`;
+        url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
         urlArray[x] = url;
     };
     return urlArray;
 };
 
-function geocode(urlArray) {
+// function transformGeocode(data) {
+//     var lat = data.results[0].geometry.location.lat;
+//     var lng = data.results[0].geometry.location.lng;
+// }
 
+function getGeocode(urlArray) {
     var cityInfo = [];
-        
     for (var x = 0; x < urlArray.length; x++) {
-        var data = $.get(urlArray[x]);
-        var lat = data.results[0].geometry.location.lat;
-        var lng = data.results[0].geometry.location.lng;
+        url = urlArray[x];
+        $.get(url, function(data){
+            var results = data;
+            cityInfo.push(results.results[0].geometry.location);
 
-        console.log(data);
+        });
     }
+    // Promise.all(cityInfo);
+    console.log(cityInfo);
+    // return cityInfo;
 }
 
 
@@ -98,7 +105,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(geocode)
+    .then(getGeocode)
 }
 
 formSubmit();
