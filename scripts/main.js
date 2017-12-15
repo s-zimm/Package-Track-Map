@@ -77,7 +77,7 @@ function transformGeocode(data) {
         resultsArray.push(position.results[0].geometry.location);
     })
     console.log(resultsArray);
-    return resultsArray;
+    return resultsArray.reverse();
 }
 
 function geoLoop(urlArray) {
@@ -88,6 +88,7 @@ function geoLoop(urlArray) {
     }
     Promise.all(cityInfo)
         .then(transformGeocode)
+        .then(createMap)
 }
 
 
@@ -120,6 +121,76 @@ function apiCalls(tracking) {
     .catch(loadStoredData)
     .then(transformUpsData)
     .then(geoLoop)
+    
+}
+
+function createMap(data) {
+    var markers = [];
+    var map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 6,
+        });
+        drop();
+    }
+
+    function drop() {
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < data.length; i++) {
+
+            if (i + 1 == (data.length)) {
+                addEndMarkerWithTimeout(data[i], i * 500);
+                bounds.extend(data[i]);
+            } else {
+                addMarkerWithTimeout(data[i], i * 500);
+                bounds.extend(data[i]);
+            }
+            if (i > 0) {
+                timeoutDrawLines(i);
+            }
+        }
+        
+        function timeoutDrawLines(i) {
+            setTimeout(drawLine, i * 600, i);
+        }
+
+        function drawLine(i) {
+            var cityCoordinates = [data[i - 1], data[i]];
+            var linePath = new google.maps.Polyline({
+                path: cityCoordinates,
+                geodesic: true,
+                strokeColor: '#77237a',
+                strokeOpacity: 0.8,
+                strokeWeight: 5
+            });
+        
+            linePath.setMap(map);
+        }
+        map.fitBounds(bounds);
+    }
+
+    function addMarkerWithTimeout(markerPosition, timeout) {
+        setTimeout(function() {
+            markers.push(new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                animation: google.maps.Animation.DROP,
+            }));
+        }, timeout);
+    }
+
+    function addEndMarkerWithTimeout(markerPosition, timeout) {
+        setTimeout(function() {
+            markers.push(new google.maps.Marker({
+                position: markerPosition,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                // icon: 'icons/blue-marker.png'
+            }));
+        }, timeout);
+    }
+    initMap();
 }
 
 formSubmit();
