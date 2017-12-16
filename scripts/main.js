@@ -43,6 +43,10 @@ function transformUpsData (data) {
     var $theMap = $('[data-map]');
     var $alert = $('[data-alert]');
 
+    function removeShake () {
+        $inputField.removeClass('invalid-input');
+    }
+    
     if (data['TrackResponse']) {
 
         $inputField.removeClass('red-border');
@@ -69,7 +73,8 @@ function transformUpsData (data) {
     } else {
 
         $mapContainer.addClass('move-map');
-        $inputField.addClass('red-border');
+        $inputField.addClass('red-border invalid-input');
+        setTimeout(removeShake, 800);
         $alert.removeClass('hide');
         console.log('ERROR!');
     }

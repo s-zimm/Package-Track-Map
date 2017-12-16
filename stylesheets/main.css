@@ -41,7 +41,7 @@ form {
 }
 
 .alert {
-    width: 30%;
+    width: 15%;
     min-width: 300px;
     text-align: center;
     margin: 5px auto 0 auto;
@@ -78,6 +78,22 @@ form {
 
 .red-border {
     border-color: red;
+}
+
+.invalid-input {
+    animation: shake 0.2s linear 4;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(8px);
+    }
+    75% {
+        transform: translateX(-8px);
+    }
 }
 
 .hide {
