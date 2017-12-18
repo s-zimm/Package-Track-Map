@@ -108,6 +108,11 @@ form {
     border-radius: 3px;
 }
 
+.table-container{
+    margin: 50px auto;
+    width: 70%;
+}
+
 .footer {
     display: flex;
     width: 100%;
