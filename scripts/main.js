@@ -1,5 +1,5 @@
 var LS_KEY = 'ups-data';
-var STATUS;
+// var STATUS;
 
 function formSubmit() {
     var $trackingNumberForm = $(`[data-form="form"]`);
@@ -38,6 +38,7 @@ function getUPSdata (tracking) {
 };
 
 function transformUpsData (data) {
+    console.log(data);
     var $inputField = $('[data-tracking-number]');
     var $mapContainer = $('[data-map-container]');
     var $theMap = $('[data-map]');
@@ -55,20 +56,35 @@ function transformUpsData (data) {
         $alert.addClass('hide');
 
         var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
-        var urlArray = []
+        var urlArray = [];
         var key = "&key=AIzaSyCBha1IL7d4-v_Y9X8NA_R8Mk0qPHtTo64";
-        var STATUS = transformData[0]['Status']['Description'];
+        var pkgWeight = {
+            unit: data['TrackResponse']['Shipment']['Package']['PackageWeight']['UnitOfMeasurement']['Code'],
+            weight: data['TrackResponse']['Shipment']['Package']['PackageWeight']['Weight']
+        };
+        var service = data['TrackResponse']['Shipment']['Service']['Description'];
         for (x = 0; x < transformData.length; x++) {
             var city = transformData[x]['ActivityLocation']['Address']['City'];
             var state = transformData[x]['ActivityLocation']['Address']['StateProvinceCode'];
+            var status = transformData[x]['Status']['Description'];
+            var date = transformData[x]['Date'];
+            var time = transformData[x]['Time'];
             // the first location that is used seems to be the country only
             if (city === undefined) {
                 break;
             };
             url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
-            urlArray[x] = url;
+            dataArray[x] = {
+                'City': city,
+                'State': state,
+                'Status': status,
+                'Date': date,
+                'Time': time,
+                'URL': url
+            };
         };
-        return urlArray;
+        console.log(dataArray);
+        return dataArray;
 
     } else {
 
@@ -90,6 +106,17 @@ function transformUpsData (data) {
 //     for ( var key in obj ) newArr.push(obj[key]);
 //     return newArr;  
 // };
+
+function geoLoop(dataArray) {
+    var cityInfo = [];
+    for (var x = 0; x < dataArray.length; x++) {
+        url = dataArray[x]['URL'];
+        cityInfo.push($.get(url));
+    }
+    Promise.all(cityInfo)
+        .then(transformGeocode)
+        .then(createMap)
+}
 
 function transformGeocode(data) {
     var resultsArray = [];
@@ -113,7 +140,6 @@ function geoLoop(urlArray) {
         .then(createMap)       
 }
 
-
 function storeData (data) {
     localStorage.setItem(LS_KEY, JSON.stringify(data));
     return data;
@@ -136,7 +162,7 @@ function loadStoredData () {
 function apiCalls(tracking) {
     getUPSdata(tracking)
     .then(storeData)
-    .catch(loadStoredData)
+    // .catch(loadStoredData)
     .then(transformUpsData)
     .then(geoLoop)
 }
@@ -213,3 +239,32 @@ function createMap(data) {
 }
 
 formSubmit();
+
+
+
+dataArray = [
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+]
