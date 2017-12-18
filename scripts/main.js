@@ -1,6 +1,5 @@
-var LS_KEY = 'ups-data'
+var LS_KEY = 'ups-data';
 var STATUS;
-var cityInfo = [];
 
 function formSubmit() {
     var $trackingNumberForm = $(`[data-form="form"]`);
@@ -39,35 +38,61 @@ function getUPSdata (tracking) {
 };
 
 function transformUpsData (data) {
-    var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
-    var urlArray = []
-    var key = "&key=AIzaSyCBha1IL7d4-v_Y9X8NA_R8Mk0qPHtTo64";
-    var STATUS = transformData[0]['Status']['Description'];
-    for (x = 0; x < transformData.length; x++) {
-        var city = transformData[x]['ActivityLocation']['Address']['City'];
-        var state = transformData[x]['ActivityLocation']['Address']['StateProvinceCode'];
-        // the first location that is used seems to be the country only
-        if (city === undefined) {
-            break;
+    var $inputField = $('[data-tracking-number]');
+    var $mapContainer = $('[data-map-container]');
+    var $theMap = $('[data-map]');
+    var $alert = $('[data-alert]');
+
+    function removeShake () {
+        $inputField.removeClass('invalid-input');
+    }
+    
+    if (data['TrackResponse']) {
+
+        $inputField.removeClass('red-border');
+        $mapContainer.removeClass('move-map');
+        $theMap.addClass('map-border');
+        $alert.addClass('hide');
+
+        var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
+        var urlArray = []
+        var key = "&key=AIzaSyCBha1IL7d4-v_Y9X8NA_R8Mk0qPHtTo64";
+        var STATUS = transformData[0]['Status']['Description'];
+        for (x = 0; x < transformData.length; x++) {
+            var city = transformData[x]['ActivityLocation']['Address']['City'];
+            var state = transformData[x]['ActivityLocation']['Address']['StateProvinceCode'];
+            // the first location that is used seems to be the country only
+            if (city === undefined) {
+                break;
+            };
+            url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
+            urlArray[x] = url;
         };
-        url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
-        urlArray[x] = url;
-    };
-    return urlArray;
+        return urlArray;
+
+    } else {
+
+        $mapContainer.addClass('move-map');
+        $inputField.addClass('red-border invalid-input');
+        setTimeout(removeShake, 800);
+        $alert.removeClass('hide');
+        console.log('ERROR!');
+    }
+    
 };
 
 function transformGeocode(data) {
     var resultsArray = [];
     var info = data;
     info.forEach(function(position) {
-        resultsArray.push(position.results[0].geometry.location);
+        resultsArray.push(position.results[0].geometry.location);  
     })
     console.log(resultsArray);
     return resultsArray.reverse();
 }
 
 function geoLoop(urlArray) {
-    cityInfo = [];
+    var cityInfo = [];
     for (var x = 0; x < urlArray.length; x++) {
         url = urlArray[x];
         cityInfo.push($.get(url)); 
@@ -95,7 +120,6 @@ function loadStoredData () {
     return JSON.parse(localStorage.getItem(LS_KEY));
 };
 
-
 // Procedure
 
 function apiCalls(tracking) {
@@ -103,8 +127,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(geoLoop)
-    
+    .then(geoLoop)  
 }
 
 // Map and point initialization - referenced in geoLoop function Promise

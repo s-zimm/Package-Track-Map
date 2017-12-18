@@ -77,6 +77,14 @@ form {
     color: #777;
 }
 
+
+.alert {
+    width: 15%;
+    min-width: 300px;
+    text-align: center;
+    margin: 5px auto 0 auto;
+}
+
 #tracking-number-input {
     min-width: 200px;
 }
@@ -95,9 +103,41 @@ form {
     height: 100%;
 }
 
+.map-border {
+    border: 2px solid rgb(202, 200, 200);
+    border-radius: 3px;
+}
+
 .footer {
     display: flex;
     width: 100%;
     height: 5%;
 }
 
+.red-border {
+    border-color: red;
+}
+
+.invalid-input {
+    animation: shake 0.15s linear 4;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(8px);
+    }
+    75% {
+        transform: translateX(-8px);
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.move-map {
+    margin-top: 5px;
+}
