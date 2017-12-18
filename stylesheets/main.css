@@ -15,47 +15,38 @@ html, body {
 header {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: auto;
-    padding-bottom: 2vh;
-    padding-top: 1vh;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
     margin-bottom: 4vh;
-    background-color: grey;
+    background-color: rgb(135, 169, 57);
     color: white;
 }
 
-h1 {
-    font-size: 4.5vh;
-    text-align: center;
-    margin-top: 3vh;
-    margin-bottom: 4vh;
+.navbar-default {
+    margin-bottom: 0;
 }
 
-header ul {
+.navbar-nav {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 0;
-    margin: 0;
+    justify-content: flex-end;
 }
 
-header ul li {
-    list-style-type: none;
-    display: inline-block;
-    font-size: 2.2vh;
+.navbar-brand {
+    font-size: 4vh;
 }
 
-header ul li:hover {
-
+@media screen and (max-width: 475px) {
+    .navbar-brand {
+        font-size: 7vw;
+    }
 }
 
-header ul li:active {
-
+ul li {
+    font-size: 2vh;
+    align-self: flex-end;
 }
 
 .form-container {
@@ -76,11 +67,14 @@ form {
     min-width: 300px;
     height: 100%;
     min-height: 125px;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
     border: solid 2px rgba(185, 185, 185, 0.712);
 }
 
 .form-group label {
     font-size: 2.5vh;
+    color: #777;
 }
 
 #tracking-number-input {
