@@ -39,8 +39,14 @@
         <form data-form="form">
             <div class="form-group">
                 <label for="tracking-number-input">Tracking Number</label>
-                <input class="form-control" name="tracking-input" id="tracking-number-input"  placeholder="ex. 11A32f3409sLX9" data-tracking-number>
-            </div>
+                <div id='form-inputs'>
+                    <input class="form-control" name="tracking-input" id="tracking-number-input"  placeholder="ex. 11A32f3409sLX9" data-tracking-number>
+                    <select class="form-control" id="sel1">
+                        <option>UPS</option>
+                        <option>Fedex</option>
+                    </select>
+                </div>
+              </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
