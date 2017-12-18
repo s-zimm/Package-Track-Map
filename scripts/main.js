@@ -38,6 +38,7 @@ function getUPSdata (tracking) {
 };
 
 function transformUpsData (data) {
+    console.log(data);
     var $inputField = $('[data-tracking-number]');
     var $mapContainer = $('[data-map-container]');
     var $theMap = $('[data-map]');
@@ -66,7 +67,7 @@ function transformUpsData (data) {
                 break;
             };
             url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
-            urlArray[x] = url;
+            urlArray[x]. = url;
         };
         return urlArray;
 
@@ -202,3 +203,32 @@ function createMap(data) {
 }
 
 formSubmit();
+
+
+
+dataArray = [
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+    {"location": "Atlanta, GA",
+     "date-time": "12/13/17 at 12:42:03",
+     "status": "departure scan",
+     "url": "http...",
+     "number": "0"
+    },
+]
