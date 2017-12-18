@@ -56,7 +56,7 @@ function transformUpsData (data) {
         $alert.addClass('hide');
 
         var transformData = data['TrackResponse']['Shipment']['Package']['Activity'];
-        var urlArray = [];
+        var dataArray = [];
         var key = "&key=AIzaSyCBha1IL7d4-v_Y9X8NA_R8Mk0qPHtTo64";
         var pkgWeight = {
             unit: data['TrackResponse']['Shipment']['Package']['PackageWeight']['UnitOfMeasurement']['Code'],
@@ -110,7 +110,7 @@ function transformUpsData (data) {
 function geoLoop(dataArray) {
     var cityInfo = [];
     for (var x = 0; x < dataArray.length; x++) {
-        url = dataArray[x]['URL'];
+        url = dataArray[x]['URL'];  
         cityInfo.push($.get(url));
     }
     Promise.all(cityInfo)
@@ -124,20 +124,7 @@ function transformGeocode(data) {
     info.forEach(function(position) {
         resultsArray.push(position.results[0].geometry.location);  
     })
-    console.log(resultsArray);
     return resultsArray.reverse();
-}
-
-function geoLoop(urlArray) {
-    var cityInfo = [];
-    for (var x = 0; x < urlArray.length; x++) {
-        url = urlArray[x];
-        cityInfo.push($.get(url)); 
-    }
-    Promise.all(cityInfo)
-        // .then(removeDuplicates)
-        .then(transformGeocode)
-        .then(createMap)       
 }
 
 function storeData (data) {
