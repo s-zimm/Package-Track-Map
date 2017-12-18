@@ -68,6 +68,7 @@ function transformUpsData (data) {
             var state = transformData[x]['ActivityLocation']['Address']['StateProvinceCode'];
             var status = transformData[x]['Status']['Description'];
             var date = transformData[x]['Date'];
+            var date2 = `${date.slice(0,4)}-${date.slice(4,6)}-${date.slice(6,8)}`;
             var time = transformData[x]['Time'];
             var time2 = `${time.slice(0, 2)}:${time.slice(2, 4)}`;
             // the first location that is used seems to be the country only
@@ -79,7 +80,7 @@ function transformUpsData (data) {
                 'city': city,
                 'state': state,
                 'status': status,
-                'date': date,
+                'date': date2,
                 'time': time2,
                 'URL': url
             };
@@ -99,9 +100,15 @@ function eraseTable() {
 }
 
 function createTable(dataArray) {
-        var dataLength = dataArray.length;
-        for (var i = 0; i < dataLength; i++) {
-        var tData = $(`<tr><td>${i + 1}</td><td>${dataArray[dataLength - (i + 1)].city}</td><td>${dataArray[dataLength - (i + 1)].state}</td><td>${dataArray[dataLength - (i + 1)].status}</td><td>${dataArray[dataLength - (i + 1)].time}</td></tr>`);
+    var dataLength = dataArray.length;
+    for (var i = 0; i < dataLength; i++) {
+        var reverse = dataLength - (i + 1);
+        var tData = $(`<tr><td>${i + 1}</td>
+                           <td>${dataArray[reverse].city}</td>
+                           <td>${dataArray[reverse].state}</td>
+                           <td>${dataArray[reverse].status}</td>
+                           <td>${dataArray[reverse].date}</td>
+                           <td>${dataArray[reverse].time}</td></tr>`);
         $checkpointTable.append(tData);
     }
 }
@@ -135,11 +142,6 @@ function transformGeocode(data) {
     })
     return resultsArray.reverse();
 }
-
-function storeData (data) {
-    localStorage.setItem(LS_KEY, JSON.stringify(data));
-    return data;
-};
 
 // storing data offline
 
@@ -276,21 +278,23 @@ function transformFedexData (data) {
             var status = transformData[x]['details'];
             var date = datetimeSplit[0];
             var time = datetimeSplit[1];
+            var time2 = time.slice(0, 5)
             // the first location that is used seems to be the country only
             if (city === undefined) {
                 break;
             };
             url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
             dataArray[x] = {
-                'City': city,
-                'State': state,
-                'Status': status,
-                'Date': date,
-                'Time': time,
+                'city': city,
+                'state': state,
+                'status': status,
+                'date': date,
+                'time': time2,
                 'URL': url
             };
         };
-        console.log(dataArray);
+        eraseTable();
+        createTable(dataArray);
         return dataArray;
 
     } else {
@@ -305,12 +309,10 @@ function removeShake () {
     $inputField.removeClass('invalid-input');
 }
 
-
 function trackingCodeError () {
     $mapContainer.addClass('move-map');
     $inputField.addClass('red-border invalid-input');
     setTimeout(removeShake, 800);
     $alert.removeClass('hide');
     console.log('ERROR!');
-};
-
+}
