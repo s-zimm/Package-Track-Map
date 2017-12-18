@@ -125,7 +125,7 @@ function loadStoredData () {
 function apiCalls(tracking) {
     getUPSdata(tracking)
     .then(storeData)
-    .catch(loadStoredData)
+    // .catch(loadStoredData)
     .then(transformUpsData)
     .then(geoLoop)  
 }
