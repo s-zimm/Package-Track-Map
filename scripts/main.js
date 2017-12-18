@@ -81,15 +81,15 @@ function transformUpsData (data) {
     
 };
 
-function removeDuplicates( arr, prop ) {
-    var obj = {};
-    for ( var i = 0; i < arr.length; i++){
-      if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
-    }
-    var newArr = [];
-    for ( var key in obj ) newArr.push(obj[key]);
-    return newArr;  
-};
+// function removeDuplicates( arr, prop ) {
+//     var obj = {};
+//     for ( var i = 0; i < arr.length; i++){
+//       if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+//     }
+//     var newArr = [];
+//     for ( var key in obj ) newArr.push(obj[key]);
+//     return newArr;  
+// };
 
 function transformGeocode(data) {
     var resultsArray = [];
@@ -110,9 +110,7 @@ function geoLoop(urlArray) {
     Promise.all(cityInfo)
         // .then(removeDuplicates)
         .then(transformGeocode)
-        .then(createMap)
-        
-        
+        .then(createMap)       
 }
 
 
