@@ -37,6 +37,8 @@ function getUPSdata (tracking) {
     return data;
 };
 
+
+
 function transformUpsData (data) {
     console.log(data);
     var $inputField = $('[data-tracking-number]');
@@ -255,3 +257,10 @@ dataArray = [
      "number": "0"
     },
 ]
+
+// FEDEX Tracking
+
+function fedexData (tracking) {
+    var data = $.get(`http://shipit-api.herokuapp.com/api/carriers/fedex/ + ${tracking}`);
+    return data;
+};
