@@ -81,7 +81,7 @@ form {
 }
 
 .invalid-input {
-    animation: shake 0.2s linear 4;
+    animation: shake 0.15s linear 4;
 }
 
 @keyframes shake {
