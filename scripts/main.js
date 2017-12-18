@@ -113,16 +113,6 @@ function createTable(dataArray) {
     }
 }
 
-// function removeDuplicates( arr, prop ) {
-//     var obj = {};
-//     for ( var i = 0; i < arr.length; i++){
-//       if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
-//     }
-//     var newArr = [];
-//     for ( var key in obj ) newArr.push(obj[key]);
-//     return newArr;  
-// };
-
 function geoLoop(dataArray) {
     var cityInfo = [];
     for (var x = 0; x < dataArray.length; x++) {
@@ -134,14 +124,34 @@ function geoLoop(dataArray) {
         .then(createMap)
 }
 
-function transformGeocode(data) {
-    var resultsArray = [];
-    var info = data;
-    info.forEach(function(position) {
-        resultsArray.push(position.results[0].geometry.location);  
-    })
-    return resultsArray.reverse();
-}
+function removeDuplicates( arr, prop, prop ) {
+        var obj = {};
+        for ( var i = 0, len = arr.length; i < len; i++ ){
+          if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+        }
+        var newArr = [];
+        for ( var key in obj ) newArr.push(obj[key]);
+        console.log(newArr)
+        return newArr
+    };
+      
+    function returnfilterArray(data){
+        var filteredArray = data;
+        return filteredArray;
+     };
+     
+     function transformGeocode(data) {
+         var resultsArray = [];
+         var info = data;
+        console.log(data);
+         info.forEach(function(position) {
+             resultsArray.push(position.results[0].geometry.location);  
+        })
+        console.log(resultsArray);
+        var noDuplicates = removeDuplicates(resultsArray,"lat","lng");
+        return returnfilterArray(noDuplicates);
+    };
+  
 
 // storing data offline
 
