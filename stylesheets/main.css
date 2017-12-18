@@ -146,3 +146,16 @@ form {
 .move-map {
     margin-top: 5px;
 }
+
+#form-inputs {
+    display: grid;
+    grid-template-rows: 100%;
+}
+
+#sel1 {
+    grid-column-start: 3;
+}
+
+#tracking-number-input {
+    grid-column-start: 1;
+}
