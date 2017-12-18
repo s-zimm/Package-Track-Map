@@ -81,6 +81,16 @@ function transformUpsData (data) {
     
 };
 
+function removeDuplicates( arr, prop ) {
+    var obj = {};
+    for ( var i = 0; i < arr.length; i++){
+      if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+    }
+    var newArr = [];
+    for ( var key in obj ) newArr.push(obj[key]);
+    return newArr;  
+};
+
 function transformGeocode(data) {
     var resultsArray = [];
     var info = data;
@@ -98,8 +108,11 @@ function geoLoop(urlArray) {
         cityInfo.push($.get(url)); 
     }
     Promise.all(cityInfo)
+        // .then(removeDuplicates)
         .then(transformGeocode)
         .then(createMap)
+        
+        
 }
 
 
@@ -127,7 +140,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(geoLoop)  
+    .then(geoLoop)
 }
 
 // Map and point initialization - referenced in geoLoop function Promise
