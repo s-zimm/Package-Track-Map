@@ -60,7 +60,7 @@ function transformGeocode(data) {
     var resultsArray = [];
     var info = data;
     info.forEach(function(position) {
-        resultsArray.push(position.results[0].geometry.location);
+        resultsArray.push(position.results[0].geometry.location);  
     })
     console.log(resultsArray);
     return resultsArray.reverse();
@@ -95,7 +95,6 @@ function loadStoredData () {
     return JSON.parse(localStorage.getItem(LS_KEY));
 };
 
-
 // Procedure
 
 function apiCalls(tracking) {
@@ -103,8 +102,7 @@ function apiCalls(tracking) {
     .then(storeData)
     .catch(loadStoredData)
     .then(transformUpsData)
-    .then(geoLoop)
-    
+    .then(geoLoop)  
 }
 
 // Map and point initialization - referenced in geoLoop function Promise
