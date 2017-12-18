@@ -70,9 +70,7 @@ function transformUpsData (data) {
             var status = transformData[x]['Status']['Description'];
             var date = transformData[x]['Date'];
             var time = transformData[x]['Time'];
-            console.log(time);
             var time2 = `${time.slice(0, 2)}:${time.slice(2, 4)}`;
-            console.log(time2);
             // the first location that is used seems to be the country only
             if (city === undefined) {
                 break;
@@ -87,6 +85,7 @@ function transformUpsData (data) {
                 'URL': url
             };
         };
+        eraseTable();
         createTable(dataArray);
         return dataArray;
 
@@ -101,7 +100,11 @@ function transformUpsData (data) {
     
 };
 
-function createTable (dataArray) {
+function eraseTable() {
+    $checkpointTable.empty();
+}
+
+function createTable(dataArray) {
         var dataLength = dataArray.length;
         for (var i = 0; i < dataLength; i++) {
         var tData = $(`<tr><td>${i + 1}</td><td>${dataArray[dataLength - (i + 1)].city}</td><td>${dataArray[dataLength - (i + 1)].state}</td><td>${dataArray[dataLength - (i + 1)].status}</td><td>${dataArray[dataLength - (i + 1)].time}</td></tr>`);
