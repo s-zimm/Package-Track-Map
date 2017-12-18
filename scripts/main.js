@@ -1,4 +1,5 @@
 var LS_KEY = 'ups-data';
+var $checkpointTable = $('[data-checkpoint]');
 // var STATUS;
 
 function formSubmit() {
@@ -63,27 +64,30 @@ function transformUpsData (data) {
             weight: data['TrackResponse']['Shipment']['Package']['PackageWeight']['Weight']
         };
         var service = data['TrackResponse']['Shipment']['Service']['Description'];
-        for (x = 0; x < transformData.length; x++) {
+        for (var x = 0; x < transformData.length; x++) {
             var city = transformData[x]['ActivityLocation']['Address']['City'];
             var state = transformData[x]['ActivityLocation']['Address']['StateProvinceCode'];
             var status = transformData[x]['Status']['Description'];
             var date = transformData[x]['Date'];
             var time = transformData[x]['Time'];
+            console.log(time);
+            var time2 = `${time.slice(0, 2)}:${time.slice(2, 4)}`;
+            console.log(time2);
             // the first location that is used seems to be the country only
             if (city === undefined) {
                 break;
             };
             url = `https://maps.googleapis.com/maps/api/geocode/json?address=${city},+${state}${key}`;
             dataArray[x] = {
-                'City': city,
-                'State': state,
-                'Status': status,
-                'Date': date,
-                'Time': time,
+                'city': city,
+                'state': state,
+                'status': status,
+                'date': date,
+                'time': time2,
                 'URL': url
             };
         };
-        console.log(dataArray);
+        createTable(dataArray);
         return dataArray;
 
     } else {
@@ -96,6 +100,14 @@ function transformUpsData (data) {
     }
     
 };
+
+function createTable (dataArray) {
+        var dataLength = dataArray.length;
+        for (var i = 0; i < dataLength; i++) {
+        var tData = $(`<tr><td>${i + 1}</td><td>${dataArray[dataLength - (i + 1)].city}</td><td>${dataArray[dataLength - (i + 1)].state}</td><td>${dataArray[dataLength - (i + 1)].status}</td><td>${dataArray[dataLength - (i + 1)].time}</td></tr>`);
+        $checkpointTable.append(tData);
+    }
+}
 
 // function removeDuplicates( arr, prop ) {
 //     var obj = {};
@@ -226,32 +238,3 @@ function createMap(data) {
 }
 
 formSubmit();
-
-
-
-dataArray = [
-    {"location": "Atlanta, GA",
-     "date-time": "12/13/17 at 12:42:03",
-     "status": "departure scan",
-     "url": "http...",
-     "number": "0"
-    },
-    {"location": "Atlanta, GA",
-     "date-time": "12/13/17 at 12:42:03",
-     "status": "departure scan",
-     "url": "http...",
-     "number": "0"
-    },
-    {"location": "Atlanta, GA",
-     "date-time": "12/13/17 at 12:42:03",
-     "status": "departure scan",
-     "url": "http...",
-     "number": "0"
-    },
-    {"location": "Atlanta, GA",
-     "date-time": "12/13/17 at 12:42:03",
-     "status": "departure scan",
-     "url": "http...",
-     "number": "0"
-    },
-]
