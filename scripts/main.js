@@ -1,4 +1,5 @@
 var LS_KEY = 'ups-data';
+var $navCollapse = $(`[data-target="#navbar-collapse"]`);
 var $checkpointTable = $('[data-checkpoint]');
 var $checkpointTableBody = $('[data-checkpoint-body]');
 var $inputField = $('[data-tracking-number]');
@@ -6,7 +7,9 @@ var $mapContainer = $('[data-map-container]');
 var $theMap = $('[data-map]');
 var $alert = $('[data-alert]');
 
-// var STATUS;
+$navCollapse.on('click', function() {
+    $mapContainer.toggleClass("reduce-margin");
+});
 
 function formSubmit() {
     var $trackingNumberForm = $(`[data-form="form"]`);
