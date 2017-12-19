@@ -124,7 +124,7 @@ function geoLoop(dataArray) {
         .then(createMap)
 }
 
-function removeDuplicates( arr, prop, prop ) {
+    function removeDuplicates( arr, prop, prop ) {
         var obj = {};
         for ( var i = 0, len = arr.length; i < len; i++ ){
           if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
@@ -132,13 +132,13 @@ function removeDuplicates( arr, prop, prop ) {
         var newArr = [];
         for ( var key in obj ) newArr.push(obj[key]);
         console.log(newArr)
-        return newArr
+        return newArr.reverse()
     };
       
     function returnfilterArray(data){
         var filteredArray = data;
         return filteredArray;
-     };
+    };
      
      function transformGeocode(data) {
          var resultsArray = [];
