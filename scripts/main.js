@@ -186,7 +186,6 @@ function apiCalls(tracking, shippingCompany) {
 // Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
-    var markers = [];
     var map;
     var infowindow = new google.maps.InfoWindow();
 
