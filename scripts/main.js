@@ -116,43 +116,44 @@ function createTable(dataArray) {
 }
 
 function geoLoop(dataArray) {
-    var cityInfo = [];
-    for (var x = 0; x < dataArray.length; x++) {
-        url = dataArray[x]['URL'];  
-        cityInfo.push($.get(url));
-    }
-    Promise.all(cityInfo)
-        .then(transformGeocode)
-        .then(createMap)
+
+    var promArray = dataArray.map(function(obj) {
+        return $.get(obj['URL']);
+    });
+    Promise.all(promArray)
+    .then(function(geoArray) {
+        for (var i = 0; i < geoArray.length; i++) {
+            dataArray[i]['LatLng'] = geoArray[i].results[0].geometry.location;
+        }
+        return dataArray
+    })
+    .then(removeDuplicates)
+    .then(createMap);
 }
 
-    function removeDuplicates( arr, prop, prop ) {
-        var obj = {};
-        for ( var i = 0, len = arr.length; i < len; i++ ){
-          if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+function removeDuplicates( arr ) {
+    for (var i = 0; i < arr.length - 1; i++) {
+        if (arr[i]['city'] == arr[i + 1]['city']) {
+            arr.splice(i + 1, 1);
+        } else if (arr[i]['city'] != arr[i + 1]['city']) {
+            continue;
+        } else {
+            break;
         }
-        var newArr = [];
-        for ( var key in obj ) newArr.push(obj[key]);
-        console.log(newArr)
-        return newArr.reverse()
-    };
-      
-    function returnfilterArray(data){
-        var filteredArray = data;
-        return filteredArray;
-    };
+        console.log(arr[i])
+    }
+    // for ( var i = 0, len = arr.length; i < len; i++ ){
+    //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+    // }
+    // var newArr = [];
+    // for ( var key in obj ) newArr.push(obj[key]);
+    // console.log(newArr)
+    return arr.reverse()
+};
+  
+
      
-     function transformGeocode(data) {
-         var resultsArray = [];
-         var info = data;
-        console.log(data);
-         info.forEach(function(position) {
-             resultsArray.push(position.results[0].geometry.location);  
-        })
-        console.log(resultsArray);
-        var noDuplicates = removeDuplicates(resultsArray,"lat","lng");
-        return returnfilterArray(noDuplicates);
-    };
+    
   
 
 // storing data offline
@@ -186,6 +187,7 @@ function apiCalls(tracking, shippingCompany) {
 // Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
+    console.log(data);
     var map;
     var infowindow = new google.maps.InfoWindow();
 
@@ -201,7 +203,7 @@ function createMap(data) {
         for (var i = 0; i < data.length; i++) {
 
             addMarkerWithTimeout(data[i], i * 500);
-            bounds.extend(data[i]);
+            bounds.extend(data[i]['LatLng']);
 
             if (i > 0) {
                 timeoutDrawLines(i);
@@ -213,7 +215,7 @@ function createMap(data) {
         }
 
         function drawLine(i) {
-            var cityCoordinates = [data[i - 1], data[i]];
+            var cityCoordinates = [data[i - 1]['LatLng'], data[i]['LatLng']];
             var linePath = new google.maps.Polyline({
                 path: cityCoordinates,
                 geodesic: true,
@@ -229,15 +231,16 @@ function createMap(data) {
 
 
     function addMarkerWithTimeout(markerPosition, timeout) {
+        console.log(markerPosition);
         setTimeout(function() {
             var newMarker = new google.maps.Marker({
-                position: markerPosition,
+                position: markerPosition['LatLng'],
                 map: map,
                 animation: google.maps.Animation.DROP,
             });
             var markerObject = {
                 'Marker': newMarker,
-                'Info': `<p>Latitude: ${markerPosition['lat']}</p><p>Longitude: ${markerPosition['lng']}</p>`
+                'Info': `<p>City: ${markerPosition['city']}</p><p>State: ${markerPosition['state']}</p><p>Status: ${markerPosition['status']}`
             }
             markerObject['Marker'].addListener('click', function() {
                 infowindow.setContent(markerObject['Info']);
@@ -259,7 +262,7 @@ function getFedexData (tracking) {
 };
 
 function transformFedexData (data) {
-    console.log(data);
+    // console.log(data);
     if (data['activities']) {
         $inputField.removeClass('red-border');
         $mapContainer.removeClass('move-map');
