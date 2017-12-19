@@ -47,7 +47,6 @@ function getUPSdata (tracking) {
 
 
 function transformUpsData (data) {
-    console.log(data);
     
     if (data['TrackResponse']) {
 
@@ -134,13 +133,12 @@ function geoLoop(dataArray) {
 function removeDuplicates( arr ) {
     for (var i = 0; i < arr.length - 1; i++) {
         if (arr[i]['city'] == arr[i + 1]['city']) {
-            arr.splice(i + 1, 1);
+            arr.splice(i, 1);
         } else if (arr[i]['city'] != arr[i + 1]['city']) {
             continue;
         } else {
             break;
         }
-        console.log(arr[i])
     }
     // for ( var i = 0, len = arr.length; i < len; i++ ){
     //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
@@ -150,11 +148,6 @@ function removeDuplicates( arr ) {
     // console.log(newArr)
     return arr.reverse()
 };
-  
-
-     
-    
-  
 
 // storing data offline
 
@@ -187,7 +180,6 @@ function apiCalls(tracking, shippingCompany) {
 // Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
-    console.log(data);
     var map;
     var infowindow = new google.maps.InfoWindow();
 
@@ -231,7 +223,6 @@ function createMap(data) {
 
 
     function addMarkerWithTimeout(markerPosition, timeout) {
-        console.log(markerPosition);
         setTimeout(function() {
             var newMarker = new google.maps.Marker({
                 position: markerPosition['LatLng'],
@@ -240,7 +231,9 @@ function createMap(data) {
             });
             var markerObject = {
                 'Marker': newMarker,
-                'Info': `<p>City: ${markerPosition['city']}</p><p>State: ${markerPosition['state']}</p><p>Status: ${markerPosition['status']}`
+                'Info': `<strong>City</strong>: ${markerPosition['city']}</p>
+                <p><strong>State</strong>: ${markerPosition['state']}</p>
+                <p><strong>Status</strong>: ${markerPosition['status']}`
             }
             markerObject['Marker'].addListener('click', function() {
                 infowindow.setContent(markerObject['Info']);
@@ -262,7 +255,6 @@ function getFedexData (tracking) {
 };
 
 function transformFedexData (data) {
-    // console.log(data);
     if (data['activities']) {
         $inputField.removeClass('red-border');
         $mapContainer.removeClass('move-map');
