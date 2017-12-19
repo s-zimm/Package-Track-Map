@@ -186,8 +186,8 @@ function apiCalls(tracking, shippingCompany) {
 // Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
-    var markers = [];
     var map;
+    var infowindow = new google.maps.InfoWindow();
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -200,13 +200,9 @@ function createMap(data) {
         var bounds = new google.maps.LatLngBounds();
         for (var i = 0; i < data.length; i++) {
 
-            if (i + 1 == (data.length)) {
-                addEndMarkerWithTimeout(data[i], i * 500);
-                bounds.extend(data[i]);
-            } else {
-                addMarkerWithTimeout(data[i], i * 500);
-                bounds.extend(data[i]);
-            }
+            addMarkerWithTimeout(data[i], i * 500);
+            bounds.extend(data[i]);
+
             if (i > 0) {
                 timeoutDrawLines(i);
             }
@@ -234,22 +230,19 @@ function createMap(data) {
 
     function addMarkerWithTimeout(markerPosition, timeout) {
         setTimeout(function() {
-            markers.push(new google.maps.Marker({
+            var newMarker = new google.maps.Marker({
                 position: markerPosition,
                 map: map,
                 animation: google.maps.Animation.DROP,
-            }));
-        }, timeout);
-    }
-
-    function addEndMarkerWithTimeout(markerPosition, timeout) {
-        setTimeout(function() {
-            markers.push(new google.maps.Marker({
-                position: markerPosition,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                // icon: 'icons/blue-marker.png'
-            }));
+            });
+            var markerObject = {
+                'Marker': newMarker,
+                'Info': `<p>Latitude: ${markerPosition['lat']}</p><p>Longitude: ${markerPosition['lng']}</p>`
+            }
+            markerObject['Marker'].addListener('click', function() {
+                infowindow.setContent(markerObject['Info']);
+                infowindow.open(map, markerObject['Marker']);
+            })
         }, timeout);
     }
     initMap();
