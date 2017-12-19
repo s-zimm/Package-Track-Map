@@ -21,12 +21,15 @@ header {
     padding-bottom: 3vh;
     padding-top: 3vh;
     margin-bottom: 4vh;
-    background-color: rgb(135, 169, 57);
+    background: radial-gradient( #87a939 0%, #1E8BC3 0%);
+
     color: white;
 }
 
 .navbar-default {
     margin-bottom: 0;
+    border: none;
+    border-radius: 0;
 }
 
 .navbar-nav {
@@ -77,6 +80,9 @@ form {
     color: #777;
 }
 
+#sel1 {
+    margin-left: 10px;
+}
 
 .alert {
     width: 15%;
@@ -136,10 +142,10 @@ form {
         transform: translateX(0);
     }
     25% {
-        transform: translateX(8px);
+        transform: translateX(6px);
     }
     75% {
-        transform: translateX(-8px);
+        transform: translateX(-6px);
     }
 }
 
@@ -154,6 +160,7 @@ form {
 #form-inputs {
     display: grid;
     grid-template-rows: 100%;
+    margin-right: 10px;
 }
 
 #sel1 {

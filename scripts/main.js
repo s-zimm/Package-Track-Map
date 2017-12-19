@@ -211,9 +211,9 @@ function createMap(data) {
             var linePath = new google.maps.Polyline({
                 path: cityCoordinates,
                 geodesic: true,
-                strokeColor: '#77237a',
-                strokeOpacity: 0.8,
-                strokeWeight: 5
+                strokeColor: '#1E8BC3',
+                strokeOpacity: 0.5,
+                strokeWeight: 3
             });
             linePath.setMap(map);
         }
