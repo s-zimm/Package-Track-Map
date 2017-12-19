@@ -1,5 +1,6 @@
 var LS_KEY = 'ups-data';
 var $checkpointTable = $('[data-checkpoint]');
+var $checkpointTableBody = $('[data-checkpoint-body]');
 var $inputField = $('[data-tracking-number]');
 var $mapContainer = $('[data-map-container]');
 var $theMap = $('[data-map]');
@@ -96,10 +97,11 @@ function transformUpsData (data) {
 };
 
 function eraseTable() {
-    $checkpointTable.empty();
+    $checkpointTableBody.empty();
 }
 
 function createTable(dataArray) {
+    $checkpointTable.removeClass('hide');
     var dataLength = dataArray.length;
     for (var i = 0; i < dataLength; i++) {
         var reverse = dataLength - (i + 1);
@@ -109,7 +111,7 @@ function createTable(dataArray) {
                            <td>${dataArray[reverse].status}</td>
                            <td>${dataArray[reverse].date}</td>
                            <td>${dataArray[reverse].time}</td></tr>`);
-        $checkpointTable.append(tData);
+        $checkpointTableBody.append(tData);
     }
 }
 
@@ -219,9 +221,9 @@ function createMap(data) {
             var linePath = new google.maps.Polyline({
                 path: cityCoordinates,
                 geodesic: true,
-                strokeColor: '#77237a',
-                strokeOpacity: 0.8,
-                strokeWeight: 5
+                strokeColor: '#1E8BC3',
+                strokeOpacity: 0.5,
+                strokeWeight: 3
             });
             linePath.setMap(map);
         }
