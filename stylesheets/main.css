@@ -24,6 +24,7 @@ header {
     margin-bottom: 1.9rem;
     background: radial-gradient( #87a939 0%, #1E8BC3 0%);
     color: white;
+    z-index: 1;
 }
 
 .navbar-default {
@@ -208,3 +209,10 @@ form {
     width: 100px;
 }
 
+.add-to-form {
+    margin-top: 160px
+}
+
+.add-to-header {
+    position: fixed;
+}

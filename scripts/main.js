@@ -300,7 +300,7 @@ function transformFedexData (data) {
         };
         eraseTable();
         createTable(dataArray);
-        return dataArray;
+        return dataArray; 
 
     } else {
         trackingCodeError();
@@ -313,7 +313,7 @@ function transformFedexData (data) {
 function removeShake () {
     $inputField.removeClass('invalid-input');
 }
-
+ 
 function trackingCodeError () {
     $mapContainer.addClass('move-map');
     $inputField.addClass('red-border invalid-input');
@@ -321,3 +321,28 @@ function trackingCodeError () {
     $alert.removeClass('hide');
     console.log('ERROR!');
 }
+
+// on down scroll hide the nav bar, on scroll up show the nav bar
+
+function scrollEvent () {
+    // keeps track of last scroll
+    var lastScroll = 0;
+    $(window).scroll(function(event){
+        // Sets the current scroll position
+        var st = $(this).scrollTop();
+        // Determines up-or-down scrolling
+        if ((st - lastScroll) > 0) {
+            // function call for downward-scrolling
+            $('form').removeClass('add-to-form')
+            $('header').removeClass('add-to-header');
+        } else {
+            // function call for upward-scrolling
+            $('form').addClass('add-to-form')
+            $('header').addClass('add-to-header');
+        };
+        // updates scroll position
+        lastScroll = st;
+    });
+};
+
+scrollEvent();
