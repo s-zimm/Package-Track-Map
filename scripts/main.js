@@ -125,37 +125,33 @@ function geoLoop(dataArray) {
         for (var i = 0; i < geoArray.length; i++) {
             dataArray[i]['LatLng'] = geoArray[i].results[0].geometry.location;
         }
-        return dataArray;
+        return dataArray
     })
+    .then(removeDuplicates)
     .then(createMap);
-    // for (var x = 0; x < dataArray.length; x++) {
-    //     url = dataArray[x]['URL'];
-    //     var globalVar = 0;
-
-    //     $.get(url, (res) => {
-    //         dataArray[globalVar]['LatLng'] = res.results[0].geometry.location;
-    //         globalVar++;
-    //     });
-    // }
-    // console.log(dataArray)
-
 }
 
-function removeDuplicates( arr, prop, prop ) {
-    var obj = {};
-    for ( var i = 0, len = arr.length; i < len; i++ ){
-      if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+function removeDuplicates( arr ) {
+    for (var i = 0; i < arr.length - 1; i++) {
+        if (arr[i]['city'] == arr[i + 1]['city']) {
+            arr.splice(i + 1, 1);
+        } else if (arr[i]['city'] != arr[i + 1]['city']) {
+            continue;
+        } else {
+            break;
+        }
+        console.log(arr[i])
     }
-    var newArr = [];
-    for ( var key in obj ) newArr.push(obj[key]);
-    console.log(newArr)
-    return newArr.reverse()
+    // for ( var i = 0, len = arr.length; i < len; i++ ){
+    //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+    // }
+    // var newArr = [];
+    // for ( var key in obj ) newArr.push(obj[key]);
+    // console.log(newArr)
+    return arr.reverse()
 };
   
-function returnfilterArray(data){
-    var filteredArray = data;
-    return filteredArray;
-};
+
      
     
   
