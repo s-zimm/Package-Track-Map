@@ -1,45 +1,147 @@
-.discription {
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 16px;
+}
+
+body {
+    background-color: rgba(135, 206, 250, .10)
+}
+
+.meet-the-team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    height: 75px;
+}
+
+#profile-pics{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    overflow-y: scroll;
+    height: 550px;
+    width: 100%;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    background-color: rgba(211, 211, 211, .5);
+}
+
+.dev {
+    width: 100px;
+    height: 100px;
+    margin: 0px;
+}
+
+.dev > img {
+    height: 100%;
+}
+.description {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    transform: translate(0,0);  
+    transition: all 1s;
+    opacity: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
 }
+.list {
+    display: none;
+}
+.translate {
+    transform: translatex(-20px);
+    opacity: 1;
+}
 
-
-
-
-
-
-
-
-.dev1 > img {
+#carousel-container {
     width: 100%;
-    border-radius: 100%;
 }
 
-.dev2 {
-    border: 2px solid black;
-    border-radius: 100%;
-    height: 100px;
-    width: 100px;
-}
-
-.dev3 {
-    border: 2px solid black;
-    border-radius: 100%;
-    height: 100px;
-    width: 100px;
-}
-
-.dev4 {
-    border: 2px solid black;
-    border-radius: 100%;
-    height: 100px;
-    width: 100px;
-}
-
-#myCarousel {
-    width:500px;
-    height:500px;
-}
 .item > img {
     width: 100%;
+}
+
+.code-example {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    font-size: 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+    #carousel-container {
+        width: 100%;
+        margin: 0px;
+        display: flex;
+        justify-content: center;      
+    }
+
+    .code-example {
+        display: flex;
+        justify-content: center;
+        margin: 0px;
+        font-size: 36px;
+    }
+
+    .item > img {
+        height: 768px;
+    }
+
+    .meet-the-team {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 36px;
+        height: 75px;
+    }
+
+    #profile-pics {
+        height: 450px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .dev {
+        width: 200px;
+        height: 200px;
+        margin: 0px;
+    }
+
+    .description {
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        transform: translate(0,0);  
+        transition: all .5s;
+        opacity: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+    }
+
+    .list {
+        display: block;
+    }
+
+    .translate {
+        transform: translate(-150px, 130px);
+        opacity: 1;
+    }
+
 }
