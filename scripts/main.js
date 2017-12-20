@@ -203,7 +203,7 @@ function createMap(data) {
         }
             
         function timeoutDrawLines(i) {
-            setTimeout(drawLine, i * 600, i);
+            setTimeout(drawLine, (i * 500) + 200, i);
         }
 
         function drawLine(i) {
@@ -292,7 +292,8 @@ function transformFedexData (data) {
                 'URL': url
             };
         };
-        // trackingCodeAlert(data);
+
+        trackingCodeAlertFedex(transformData);
         eraseTable();
         createTable(dataArray);
         return dataArray; 
@@ -320,24 +321,47 @@ function trackingCodeError () {
 }
 
 function trackingCodeAlertUPS (data) {
+    
+    var currentStatus = data[0]['Status']['Description'];
+
     $alert.removeClass('alert-danger');
     $alert.removeClass('alert-success');
     $alert.removeClass('alert-warning');
-    $alert.text('');
     $alert.removeClass('hide');
+    $alert.text('');
     $mapContainer.addClass('move-map');
-    var currentStatus = data[0]['Status']['Description'];
+
     console.log(currentStatus);
+
     if (currentStatus == 'Delivered') {
         $alert.addClass('alert-success');
-        $alert.text(`Status: ${data[0]['Status']['Description']}`);
+
     } else {
         $alert.addClass('alert-warning');
-        $alert.text(`Status: ${data[0]['Status']['Description']}`);
     }
+    $alert.text(`Status: ${currentStatus}`);
+}
+
+function trackingCodeAlertFedex (data) {
     
-    
-    // $alert.text(`Status: ${data[0]['Status']['Description']}`)
+    var currentStatus = data[0]['details'];
+
+    $alert.removeClass('alert-danger');
+    $alert.removeClass('alert-success');
+    $alert.removeClass('alert-warning');
+    $alert.removeClass('hide');
+    $alert.text('');
+    $mapContainer.addClass('move-map');
+
+    console.log(currentStatus);
+
+    if (currentStatus == 'Delivered') {
+        $alert.addClass('alert-success');
+
+    } else {
+        $alert.addClass('alert-warning');
+    }
+    $alert.text(`Status: ${currentStatus}`);
 }
 
 // on down scroll hide the nav bar, on scroll up show the nav bar
