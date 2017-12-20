@@ -4,37 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/256/places.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/places.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/main.css">
-    <title>Package Tracking Map</title>
+    <title>Track Your Package!</title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Visual Package Tracker</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Github Link</a></li>
-                        <li><a href="#">Code Snippet</a></li>
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
+        <div class="name">Package Tracking Map</div>
+        <div class="navs">
+            <img class="marker" src="images/places.png" data-drop-menu>
+            <a class="map-link" href="index.html" data-nav-link>Map</a>
+            <a class="about-link" href="about.html" data-nav-link>About</a>
+            <a class="github-link" rel="noopener noreferrer" target="_blank" href="https://github.com/s-zimm/Package-Track-Map" data-nav-link><img src="images/github-logo.png"></a>
+        </div>
     </header>
     <div class="form-container">
         <form data-form="form">
@@ -73,7 +58,7 @@
     </div>
     <div class="footer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBntAHoZVFjTF-m5rLO2vTlh8ZNnBcwrn0"></script>
     <script src="scripts/main.js"></script>
 </body>

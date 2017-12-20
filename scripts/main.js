@@ -1,5 +1,6 @@
 var LS_KEY = 'ups-data';
-var $navCollapse = $(`[data-target="#navbar-collapse"]`);
+var $dropMenu = $('[data-drop-menu]');
+var $navLinks = $('[data-nav-link]');
 var $checkpointTable = $('[data-checkpoint]');
 var $checkpointTableBody = $('[data-checkpoint-body]');
 var $inputField = $('[data-tracking-number]');
@@ -7,8 +8,9 @@ var $mapContainer = $('[data-map-container]');
 var $theMap = $('[data-map]');
 var $alert = $('[data-alert]');
 
-$navCollapse.on('click', function() {
-    $mapContainer.toggleClass("reduce-margin");
+$dropMenu.on('click', function() {
+    $dropMenu.toggleClass('turn-open');
+    $navLinks.toggleClass('show');
 });
 
 function formSubmit() {
