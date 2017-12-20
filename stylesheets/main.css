@@ -91,6 +91,10 @@ a img {
         border-left: 2px solid #5b5b5b;   
     }
 
+    .navs a, .navs a:hover, .navs a:focus {
+        color: black;
+    }
+
     .map-link {
         margin-top: 3px;
         padding-left: 5px;
