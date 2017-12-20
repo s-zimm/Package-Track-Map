@@ -21,15 +21,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
-    height: 75px;
+    font-size: 30px;
+    height: 55px;
 }
 
 #profile-pics{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: space-between;
     white-space: nowrap;
     overflow-y: scroll;
     height: 550px;
@@ -38,6 +38,11 @@ body {
     border-bottom: 1px solid lightgray;
     margin: 0;
     background-color: rgba(211, 211, 211, .5);
+}
+
+#text-box {
+    position: absolute;
+    border: 5px solid red;
 }
 
 .dev {
@@ -49,6 +54,7 @@ body {
 .dev > img {
     height: 100%;
 }
+
 .description {
     width: 50px;
     height: 50px;
@@ -59,20 +65,35 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 14px;
 }
+
 .list {
     display: none;
 }
+
 .translate {
-    transform: translatex(-20px);
+    transform: translatex(-30px);
     opacity: 1;
 }
 
 #carousel-container {
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .item > img {
     width: 100%;
+}
+
+.imgdiv {
+    width: 70%;
+    box-shadow: 2.5px 2.5px 4px rgb(119, 119, 119), -2.5px -2.5px 4px rgb(185, 185, 185);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.imgwidth {
+    max-width: 100%;
 }
 
 .code-example {
@@ -114,7 +135,7 @@ body {
         height: 450px;
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -140,7 +161,7 @@ body {
     }
 
     .translate {
-        transform: translate(-150px, 130px);
+        transform: translate(-210px, 130px);
         opacity: 1;
     }
 
