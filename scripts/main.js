@@ -137,16 +137,6 @@ function geoLoop(dataArray) {
 }
 
 function removeDuplicates( arr ) {
-    // for (var i = 0; i < arr.length - 1; i++) {
-    //     if (arr[i]['city'] == arr[i + 1]['city']) {
-    //         arr.splice(i+ 1, 1);
-    //     } else if (arr[i]['city'] != arr[i + 1]['city']) {
-    //         continue;
-    //     } else {
-    //         break;
-    //     }
-    //     console.log(arr[i]);
-    // }
     for (var i = 0; i < arr.length - 1; i++) {
         for (var j = 1; j < arr.length; j++) {
             if (arr[i]['city'] == arr[j]['city']) {
