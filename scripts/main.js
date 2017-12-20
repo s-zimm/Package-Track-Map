@@ -26,7 +26,7 @@ function formSubmit() {
 
 function getUPSdata (tracking) {
     var data = $.ajax({
-        'url': 'http://localhost:3000/https://wwwcie.ups.com/rest/Track',
+        'url': 'https://my-little-cors-proxy.herokuapp.com/https://wwwcie.ups.com/rest/Track',
         'type': 'POST',
         'data': JSON.stringify({
             'UPSSecurity': {
@@ -248,7 +248,7 @@ formSubmit();
 // FEDEX Tracking
 
 function getFedexData (tracking) {
-    var url = `http://localhost:3000/http://shipit-api.herokuapp.com/api/carriers/fedex/${tracking}`
+    var url = `https://my-little-cors-proxy.herokuapp.com/http://shipit-api.herokuapp.com/api/carriers/fedex/${tracking}`
     var data = $.get(url);
     return data;
 };
