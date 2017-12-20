@@ -90,6 +90,7 @@ function transformUpsData (data) {
                 'URL': url
             };
         };
+        trackingCodeAlertUPS(transformData);
         eraseTable();
         createTable(dataArray);
         return dataArray;
@@ -298,6 +299,7 @@ function transformFedexData (data) {
                 'URL': url
             };
         };
+        trackingCodeAlert(data);
         eraseTable();
         createTable(dataArray);
         return dataArray; 
@@ -319,7 +321,30 @@ function trackingCodeError () {
     $inputField.addClass('red-border invalid-input');
     setTimeout(removeShake, 800);
     $alert.removeClass('hide');
+    $alert.addClass('alert-danger');
+    $alert.text('Invalid Tracking Number');
     console.log('ERROR!');
+}
+
+function trackingCodeAlertUPS (data) {
+    $alert.removeClass('alert-danger');
+    $alert.removeClass('alert-success');
+    $alert.removeClass('alert-warning');
+    $alert.text('');
+    $alert.removeClass('hide');
+    $mapContainer.addClass('move-map');
+    var currentStatus = data[0]['Status']['Description'];
+    console.log(currentStatus);
+    if (currentStatus == 'Delivered') {
+        $alert.addClass('alert-success');
+        $alert.text(`Status: ${data[0]['Status']['Description']}`);
+    } else {
+        $alert.addClass('alert-warning');
+        $alert.text(`Status: ${data[0]['Status']['Description']}`);
+    }
+    
+    
+    // $alert.text(`Status: ${data[0]['Status']['Description']}`)
 }
 
 // on down scroll hide the nav bar, on scroll up show the nav bar
@@ -327,13 +352,13 @@ function trackingCodeError () {
 function scrollEvent () {
     // keeps track of last scroll
     var lastScroll = 0;
-    $(window).scroll(function(event){
+    $(window).scroll(function(event) {
         // Sets the current scroll position
         var st = $(this).scrollTop();
         // Determines up-or-down scrolling
         if ((st - lastScroll) > 0) {
             // function call for downward-scrolling
-            $('form').removeClass('add-to-form')
+            $('form').removeClass('add-to-form');
             $('header').removeClass('add-to-header');
         } else {
             // function call for upward-scrolling
