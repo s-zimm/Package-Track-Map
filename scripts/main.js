@@ -52,7 +52,6 @@ function getUPSdata (tracking) {
 
 
 function transformUpsData (data) {
-    console.log(data);
     
     if (data['TrackResponse']) {
 
@@ -121,44 +120,39 @@ function createTable(dataArray) {
 }
 
 function geoLoop(dataArray) {
-    var cityInfo = [];
-    for (var x = 0; x < dataArray.length; x++) {
-        url = dataArray[x]['URL'];  
-        cityInfo.push($.get(url));
-    }
-    Promise.all(cityInfo)
-        .then(transformGeocode)
-        .then(createMap)
+
+    var promArray = dataArray.map(function(obj) {
+        return $.get(obj['URL']);
+    });
+    Promise.all(promArray)
+    .then(function(geoArray) {
+        for (var i = 0; i < geoArray.length; i++) {
+            dataArray[i]['LatLng'] = geoArray[i].results[0].geometry.location;
+        }
+        return dataArray
+    })
+    .then(removeDuplicates)
+    .then(createMap);
 }
 
-    function removeDuplicates( arr, prop, prop ) {
-        var obj = {};
-        for ( var i = 0, len = arr.length; i < len; i++ ){
-          if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+function removeDuplicates( arr ) {
+    for (var i = 0; i < arr.length - 1; i++) {
+        if (arr[i]['city'] == arr[i + 1]['city']) {
+            arr.splice(i, 1);
+        } else if (arr[i]['city'] != arr[i + 1]['city']) {
+            continue;
+        } else {
+            break;
         }
-        var newArr = [];
-        for ( var key in obj ) newArr.push(obj[key]);
-        console.log(newArr)
-        return newArr.reverse()
-    };
-      
-    function returnfilterArray(data){
-        var filteredArray = data;
-        return filteredArray;
-    };
-     
-     function transformGeocode(data) {
-         var resultsArray = [];
-         var info = data;
-        console.log(data);
-         info.forEach(function(position) {
-             resultsArray.push(position.results[0].geometry.location);  
-        })
-        console.log(resultsArray);
-        var noDuplicates = removeDuplicates(resultsArray,"lat","lng");
-        return returnfilterArray(noDuplicates);
-    };
-  
+    }
+    // for ( var i = 0, len = arr.length; i < len; i++ ){
+    //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
+    // }
+    // var newArr = [];
+    // for ( var key in obj ) newArr.push(obj[key]);
+    // console.log(newArr)
+    return arr.reverse()
+};
 
 // storing data offline
 
@@ -191,8 +185,8 @@ function apiCalls(tracking, shippingCompany) {
 // Map and point initialization - referenced in geoLoop function Promise
 
 function createMap(data) {
-    var markers = [];
     var map;
+    var infowindow = new google.maps.InfoWindow();
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -205,13 +199,9 @@ function createMap(data) {
         var bounds = new google.maps.LatLngBounds();
         for (var i = 0; i < data.length; i++) {
 
-            if (i + 1 == (data.length)) {
-                addEndMarkerWithTimeout(data[i], i * 500);
-                bounds.extend(data[i]);
-            } else {
-                addMarkerWithTimeout(data[i], i * 500);
-                bounds.extend(data[i]);
-            }
+            addMarkerWithTimeout(data[i], i * 500);
+            bounds.extend(data[i]['LatLng']);
+
             if (i > 0) {
                 timeoutDrawLines(i);
             }
@@ -222,7 +212,7 @@ function createMap(data) {
         }
 
         function drawLine(i) {
-            var cityCoordinates = [data[i - 1], data[i]];
+            var cityCoordinates = [data[i - 1]['LatLng'], data[i]['LatLng']];
             var linePath = new google.maps.Polyline({
                 path: cityCoordinates,
                 geodesic: true,
@@ -239,22 +229,21 @@ function createMap(data) {
 
     function addMarkerWithTimeout(markerPosition, timeout) {
         setTimeout(function() {
-            markers.push(new google.maps.Marker({
-                position: markerPosition,
+            var newMarker = new google.maps.Marker({
+                position: markerPosition['LatLng'],
                 map: map,
                 animation: google.maps.Animation.DROP,
-            }));
-        }, timeout);
-    }
-
-    function addEndMarkerWithTimeout(markerPosition, timeout) {
-        setTimeout(function() {
-            markers.push(new google.maps.Marker({
-                position: markerPosition,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                // icon: 'icons/blue-marker.png'
-            }));
+            });
+            var markerObject = {
+                'Marker': newMarker,
+                'Info': `<strong>City</strong>: ${markerPosition['city']}</p>
+                <p><strong>State</strong>: ${markerPosition['state']}</p>
+                <p><strong>Status</strong>: ${markerPosition['status']}`
+            }
+            markerObject['Marker'].addListener('click', function() {
+                infowindow.setContent(markerObject['Info']);
+                infowindow.open(map, markerObject['Marker']);
+            })
         }, timeout);
     }
     initMap();
@@ -271,7 +260,6 @@ function getFedexData (tracking) {
 };
 
 function transformFedexData (data) {
-    console.log(data);
     if (data['activities']) {
         $inputField.removeClass('red-border');
         $mapContainer.removeClass('move-map');
@@ -312,7 +300,7 @@ function transformFedexData (data) {
         };
         eraseTable();
         createTable(dataArray);
-        return dataArray;
+        return dataArray; 
 
     } else {
         trackingCodeError();
@@ -325,7 +313,7 @@ function transformFedexData (data) {
 function removeShake () {
     $inputField.removeClass('invalid-input');
 }
-
+ 
 function trackingCodeError () {
     $mapContainer.addClass('move-map');
     $inputField.addClass('red-border invalid-input');
@@ -333,3 +321,28 @@ function trackingCodeError () {
     $alert.removeClass('hide');
     console.log('ERROR!');
 }
+
+// on down scroll hide the nav bar, on scroll up show the nav bar
+
+function scrollEvent () {
+    // keeps track of last scroll
+    var lastScroll = 0;
+    $(window).scroll(function(event){
+        // Sets the current scroll position
+        var st = $(this).scrollTop();
+        // Determines up-or-down scrolling
+        if ((st - lastScroll) > 0) {
+            // function call for downward-scrolling
+            $('form').removeClass('add-to-form')
+            $('header').removeClass('add-to-header');
+        } else {
+            // function call for upward-scrolling
+            $('form').addClass('add-to-form')
+            $('header').addClass('add-to-header');
+        };
+        // updates scroll position
+        lastScroll = st;
+    });
+};
+
+scrollEvent();
