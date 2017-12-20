@@ -147,25 +147,15 @@ function removeDuplicates( arr ) {
     //     }
     //     console.log(arr[i]);
     // }
-
     for (var i = 0; i < arr.length - 1; i++) {
-        for (var j = 0; j < arr.length - 1; j++) {
+        for (var j = 1; j < arr.length; j++) {
             if (arr[i]['city'] == arr[j]['city']) {
-                arr.splice(i, 1)
+                arr.splice(j, 1)
             } else {
                 continue;
             }
         }
     }
-    console.log(arr)
-    
-    
-    // for ( var i = 0, len = arr.length; i < len; i++ ){
-    //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
-    // }
-    // var newArr = [];
-    // for ( var key in obj ) newArr.push(obj[key]);
-    // console.log(newArr)
     return arr.reverse()
 };
 
@@ -252,8 +242,7 @@ function createMap(data) {
             var markerObject = {
                 'Marker': newMarker,
                 'Info': `<strong>City</strong>: ${markerPosition['city']}</p>
-                <p><strong>State</strong>: ${markerPosition['state']}</p>
-                <p><strong>Status</strong>: ${markerPosition['status']}`
+                <p><strong>State</strong>: ${markerPosition['state']}</p>`
             }
             markerObject['Marker'].addListener('click', function() {
                 infowindow.setContent(markerObject['Info']);
@@ -313,7 +302,7 @@ function transformFedexData (data) {
                 'URL': url
             };
         };
-        trackingCodeAlert(data);
+        // trackingCodeAlert(data);
         eraseTable();
         createTable(dataArray);
         return dataArray; 
