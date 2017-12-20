@@ -137,15 +137,29 @@ function geoLoop(dataArray) {
 }
 
 function removeDuplicates( arr ) {
+    // for (var i = 0; i < arr.length - 1; i++) {
+    //     if (arr[i]['city'] == arr[i + 1]['city']) {
+    //         arr.splice(i+ 1, 1);
+    //     } else if (arr[i]['city'] != arr[i + 1]['city']) {
+    //         continue;
+    //     } else {
+    //         break;
+    //     }
+    //     console.log(arr[i]);
+    // }
+
     for (var i = 0; i < arr.length - 1; i++) {
-        if (arr[i]['city'] == arr[i + 1]['city']) {
-            arr.splice(i, 1);
-        } else if (arr[i]['city'] != arr[i + 1]['city']) {
-            continue;
-        } else {
-            break;
+        for (var j = 0; j < arr.length - 1; j++) {
+            if (arr[i]['city'] == arr[j]['city']) {
+                arr.splice(i, 1)
+            } else {
+                continue;
+            }
         }
     }
+    console.log(arr)
+    
+    
     // for ( var i = 0, len = arr.length; i < len; i++ ){
     //   if(!obj[arr[i][prop]]) obj[arr[i][prop]] = arr[i];
     // }
