@@ -133,7 +133,7 @@ body {
     }
 
     #text-box {
-        position: absolute;
+        /* position: absolute; */
         border: 2px solid rgba(194, 194, 194, 0.685);
         border-radius: 7px;
         box-shadow: -3px -3px 2px rgba(105, 105, 105, 0.733);
