@@ -38,7 +38,7 @@ function evanPicOnClick() {
         $alexTarget.toggleClass('animated fadeOut');
         $andrewTarget.toggleClass('animated fadeOut');
         $textBox.toggleClass('animated hidden fadeIn');
-        $list.append(`<p><strong>Evan Bates</strong></p><p>Converted the UPS API into a functional array for the longitude/latitude API converter to leverage</p><p>Wrote and structured ReadMe</p>`)
+        $list.append(`<p><strong>Evan Bates</strong></p><p>Coverted Fedex promise data into a functional array for Geocoding</p><p>Converted the UPS API into a functional array for the longitude/latitude API converter to leverage</p><p>Wrote and structured ReadMe</p>`)
     })
 }
 
