@@ -132,6 +132,7 @@ Contributor.prototype.createContribution = function () {
         var paragraph = $('<p>');
         elementsArray.push(paragraph.text(each));
     })
+    return elementsArray;
 };
 
 // loads pictures from instances
@@ -141,13 +142,35 @@ function loadPictures (array) {
     });
 };
 
+
+
 function clickPicture () {
-    $('a').click(function(clicked) {
+    $('a').click(function() {
         $('a').toggleClass('animated fadeOut');
-        clicked.toggleClass('translate1');
-        clicked.toggleClass('animated fadeOut');
+        // setInterval(deletePics, 2000);
+        // loadPictures(this);
+        $(this).toggleClass('animated fadeOut')
+        $(this).toggleClass('translate1');
+        var contentBox = $('#profile-pics').append('<div>')
+        var contributionArray = this.createContribution;
+        for (var x = 0; x < contributionArray.length; x++) {
+            var paragraph = $('<p>')
+            contentBox.append(paragraph.innerText(contributionArray[x]));
+        };
+        revertPictureClick();
     });
 };
+
+function revertPictureClick () {
+    $('.translate1').click(function() {
+        $('a').toggleClass('animated fadeIn')
+        clickPicture();
+    });
+};
+
+function deletePics () {
+    $('#profile-pics').empty();
+}
 
 loadPictures(contributorArray);
 clickPicture();

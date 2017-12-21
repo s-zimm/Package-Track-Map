@@ -113,8 +113,9 @@ body {
     }
 
     .translate1 {
-        transform: translateY(-53%);
-        transition: .4s all ease;
+        position: absolute;
+        transform: translateY(-75%);
+        transition: .7s all ease;
     }
 
     .translate2 {
