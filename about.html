@@ -8,106 +8,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="stylesheets/main.css">
     <link rel="stylesheet" href="stylesheets/about.css">
     <title>About Us</title>
 </head>
 <body>
-        <header>
-                <div class="name">About Us</div>
-                <div class="navs">
-                    <img class="marker" src="images/places.png" data-drop-menu>
-                    <a class="map-link" href="index.html" data-nav-link>Map</a>
-                    <a class="about-link" href="about.html" data-nav-link>About</a>
-                    <a class="github-link" rel="noopener noreferrer" target="_blank" href="https://github.com/s-zimm/Package-Track-Map" data-nav-link><img src="images/github-logo.png"></a>
-                </div>
-            </header>
-        
-            <section>
-                <div class="meet-the-team">The Team Behind the Dream</div>
-                    <div id="profile-pics">
-                        <div class="dev" value="translate" data-toggle-translate><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png"></div>
-                            <nav class="description" data-target>Seth Zimmerman
-                                <nav>
-                                    <ul class="list">
-                                        <li>Built the Front-End form and UI</li>   
-                                        <li>Captured the form submission</li>
-                                        <li>Made the UPS API Functional</li>
-                                                
-                                    </ul>
-                                </nav>
-                            </nav> 
+    <header>
+        <div class="name">About Us</div>
+        <div class="navs">
+            <img class="marker" src="images/places.png" data-drop-menu>
+            <a class="map-link" href="index.html" data-nav-link>Map</a>
+            <a class="about-link" href="about.html" data-nav-link>About</a>
+            <a class="github-link" rel="noopener noreferrer" target="_blank" href="https://github.com/s-zimm/Package-Track-Map" data-nav-link><img src="images/github-logo.png"></a>
+        </div>
+    </header>
 
-                        <div class="dev" value="translate" data-toggle-translate-two><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png"></div>
-                            <div class="description" data-target-two>Alexander Cleoni
-                                <div>
-                                    <ul class="list">
-                                        <li>Connected the city/state to longitude/latitude API converter</li>
-                                        <li>Completed and transformed the json string into a usable dictionary</li>
-                                        <li>Formatted the About Page with code snippet and dev profiles</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        
-                        <div class="dev" value="translate" data-toggle-translate-three><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png"></div>
-                            <div class="description" data-target-three>Andrew Keller
-                            <div>
-                                    <ul class="list">
-                                        <li>Built the Front-End form and UI</li>
-                                        <li>Captured the form submission</li>
-                                        <li>Made the UPS API Functional</li>
-                                    </ul>
-                                </div>
-                            </div> 
-                        
-                        <div class="dev" value="translate" data-toggle-translate-four><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png"></div>
-                            <div class="description" data-target-four>Evan Bates
-                                <div>
-                                    <ul class="list">
-                                        <li>Built the Front-End form and UI</li>
-                                        <li>Captured the form submission</li>
-                                        <li>Made the UPS API Functional</li>
-                                    </ul>
-                                </div>
-                            </div>  
-                        
-                    </div>
+    <section>
+        <div class="meet-the-team">The Team Behind the Dream</div>
+        <div id="profile-pics">
+                <a href="#"><img src="images/seth-pic.jpg" class ='dev' data-pic-seth></a>
+                <a href="#"><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png" class="dev" data-pic-alex></a>
+                <a href="#"><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png" class="dev" data-pic-evan></a>
+                <a href="#"><img src="https://www.digitalcrafts.com/img/team-liz-obermeyer.png" class="dev" data-pic-andrew></a>
+
+            <div id="text-box" class="hidden" data-text-box><ul data-list></ul></div>
             
-                    <div class="code-example">Code Example</div>
-                    <div id="carousel-container">
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-                                    <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                </ol>
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                    <img src="code-snippet-1.png" alt="Los Angeles">
-                                    </div>
-                                
-                                    <div class="item">
-                                    <img src="code-snippet-1.png" alt="Chicago">
-                                    </div>
-                                
-                                    <div class="item">
-                                    <img src="code-snippet-1.png" alt="New York">
-                                    </div>
-                                </div>
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
+        </div>
+    
+        <div class="code-example"><h1>Code Example</h1></div>
+        <div id="carousel-container">
+            <div id="myCarousel" class="carousel slide imgdiv" data-ride="carousel" data-interval="false">
+                <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                            <div class="item active">
+                            <img src="images/snippet-1.png" alt="sample code" class="imgwidth">
                             </div>
-                        </div>
-            </section>
+                        
+                            <div class="item">
+                            <img src="images/snippet-2.png" alt="sample code" class="imgwidth">
+                            </div>
+                        
+                            <div class="item">
+                            <img src="images/snippet-3.png" alt="sample code" class="imgwidth">
+                            </div>
+                    </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
     
         
         <!-- <div class="discription">Visual Package tracker is a way for you o visualize route of your UPS or Fedex Packages.
