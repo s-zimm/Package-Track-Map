@@ -21,14 +21,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
+    font-size: 32px;
     height: 55px;
 }
 
 #profile-pics{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     height: 550px;
     width: 100%;
@@ -38,17 +38,12 @@ body {
     background-color: rgba(211, 211, 211, .5);
 }
 
-#text-box {
-    position: absolute;
-    border: 5px solid red;
-    width: 50%;
-    height: 70%;
-}
-
 .dev {
     width: 100px;
     height: 100px;
     transition: .4s all ease;
+    border-radius: 100px;
+    border: solid rgba(177, 196, 248, 0.719) 2px;
 }
 
 .dev > img {
@@ -100,6 +95,55 @@ body {
     font-size: 20px;
 }
 
+@media only screen and (min-width: 660px) {
+    .dev {
+        width: 130px;
+        height: 130px;
+    }
+
+    .meet-the-team {
+        font-size: 45px;
+    }
+
+    #profile-pics {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .translate1 {
+        transform: translateY(-53%);
+        transition: .4s all ease;
+    }
+
+    .translate2 {
+        transform: translateY(-53%);
+        transition: .4s all ease;
+    }
+
+    .translate3 {
+        transform: translateY(-53%);
+        transition: .4s all ease;
+    }
+
+    .translate4 {
+        transform: translateY(-53%);
+        transition: .4s all ease;
+    }
+
+    #text-box {
+        position: absolute;
+        border: 2px solid rgba(194, 194, 194, 0.685);
+        border-radius: 7px;
+        box-shadow: -3px -3px 2px rgba(105, 105, 105, 0.733);
+        width: 40%;
+        height: 30%;
+        bottom: -83px;
+        text-align: center;
+    }
+}
+
 @media only screen and (min-width: 1024px) {
     #carousel-container {
         width: 100%;
@@ -128,7 +172,6 @@ body {
     }
 
     #profile-pics {
-        height: 450px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -141,39 +184,8 @@ body {
         transition: .4s all ease;
     }
 
-    .description {
-        width: 50px;
-        height: 50px;
-        display: inline-block;
-        transform: translate(0,0);  
-        transition: all .5s;
-        opacity: 0;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 20px;
-    }
-
     .list {
         display: block;
-    }
-
-    .translate1 {
-        transform: translateY(-53%);
-        transition: .4s all ease;
-    }
-
-    .translate2 {
-        transform: translateY(-53%);
-        transition: .4s all ease;
-    }
-
-    .translate3 {
-        transform: translateY(-53%);
-        transition: .4s all ease;
-    }
-
-    .translate4 {
-        transform: translateY(-53%);
-        transition: .4s all ease;
     }
 
 }

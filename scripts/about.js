@@ -2,48 +2,62 @@ var $sethTarget = $('[data-pic-seth]');
 var $alexTarget = $('[data-pic-alex]');
 var $evanTarget = $('[data-pic-evan]');
 var $andrewTarget = $('[data-pic-andrew]');
+var $textBox = $('[data-text-box]');
+var $list = $('[data-list]');
 
     
-function sethPicOnCLick() {
+function sethPicOnClick() {
     $sethTarget.on('click', function(event) {
-            $sethTarget.toggleClass('translate1');
-            $alexTarget.toggleClass('animated fadeOutDown');
-            $evanTarget.toggleClass('animated fadeOutDown');
-            $andrewTarget.toggleClass('animated fadeOutDown');
+        $list.text('');
+        $sethTarget.toggleClass('translate1');
+        $alexTarget.toggleClass('animated fadeOut');
+        $evanTarget.toggleClass('animated fadeOut');
+        $andrewTarget.toggleClass('animated fadeOut');
+        $textBox.toggleClass('animated hidden fadeIn');
+        $list.append(`<p><strong>Seth Zimmerman</strong></p><p>Collected data from UPS API</p><p>Created data objects through promise chain</p><p>Wrote on-click functionality of mapmarkers and info therein</p><p>Scripted and made UI of 'About' page</p>`)
     })
 }
 
-function alexPicOnCLick() {
+function alexPicOnClick() {
     $alexTarget.on('click', function(event) {
-            $alexTarget.toggleClass('translate2');
-            $sethTarget.toggleClass('animated fadeOutDown');
-            $evanTarget.toggleClass('animated fadeOutDown');
-            $andrewTarget.toggleClass('animated fadeOutDown');
+        $list.text('');
+        $alexTarget.toggleClass('translate2');
+        $sethTarget.toggleClass('animated fadeOut');
+        $evanTarget.toggleClass('animated fadeOut');
+        $andrewTarget.toggleClass('animated fadeOut');
+        $textBox.toggleClass('animated hidden fadeIn');
+        $list.append(`<p><strong>Alexander Cleoni</strong></p><p>Completed the transformed the json string into a usable dictionary</p><p>InitiapzedUI for 'About' page</p><p>Discovered and connected the city/state to longitude/latitude APIconverter</p>`)
     })
 }
 
-function evanPicOnCLick() {
+function evanPicOnClick() {
     $evanTarget.on('click', function(event) {
-            $evanTarget.toggleClass('translate3');
-            $sethTarget.toggleClass('animated fadeOutDown');
-            $alexTarget.toggleClass('animated fadeOutDown');
-            $andrewTarget.toggleClass('animated fadeOutDown');
+        $list.text('');
+        $evanTarget.toggleClass('translate3');
+        $sethTarget.toggleClass('animated fadeOut');
+        $alexTarget.toggleClass('animated fadeOut');
+        $andrewTarget.toggleClass('animated fadeOut');
+        $textBox.toggleClass('animated hidden fadeIn');
+        $list.append(`<p><strong>Evan Bates</strong></p><p>Converted the UPS API into a functional array for the longitude/latitude API converter to leverage</p><p>Wrote and structured ReadMe</p>`)
     })
 }
 
-function andrewPicOnCLick() {
+function andrewPicOnClick() {
     $andrewTarget.on('click', function(event) {
-            $andrewTarget.toggleClass('translate4');
-            $sethTarget.toggleClass('animated fadeOutDown');
-            $alexTarget.toggleClass('animated fadeOutDown');
-            $evanTarget.toggleClass('animated fadeOutDown');
+        $list.text('');
+        $andrewTarget.toggleClass('translate4');
+        $sethTarget.toggleClass('animated fadeOut');
+        $alexTarget.toggleClass('animated fadeOut');
+        $evanTarget.toggleClass('animated fadeOut');
+        $textBox.toggleClass('animated hidden fadeIn');
+        $list.append(`<p><strong>Andrew Keller</strong></p><p>Structured the Google Map API to accept multiple longitude/latitude coordinates</p><p>Printed coordinates to the browser and created access to Google Maps API</p><p>Designed and implemented custom header</p>`)
     })
 }
 
-sethPicOnCLick();
-alexPicOnCLick();
-evanPicOnCLick();
-andrewPicOnCLick();
+sethPicOnClick();
+alexPicOnClick();
+evanPicOnClick();
+andrewPicOnClick();
 
 
 
