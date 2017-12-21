@@ -26,7 +26,7 @@ function alexPicOnClick() {
         $evanTarget.toggleClass('animated fadeOut');
         $andrewTarget.toggleClass('animated fadeOut');
         $textBox.toggleClass('animated hidden fadeIn');
-        $list.append(`<p><strong>Alexander Cleoni</strong></p><p>Completed the transformed the json string into a usable dictionary</p><p>InitiapzedUI for 'About' page</p><p>Discovered and connected the city/state to longitude/latitude APIconverter</p>`)
+        $list.append(`<p><strong>Alexander Cleoni</strong></p><p>Completed the transformed the json string into a usable dictionary</p><p>Initialized UI for 'About' page</p><p>Discovered and connected the city/state to longitude/latitude API converter</p>`)
     })
 }
 
