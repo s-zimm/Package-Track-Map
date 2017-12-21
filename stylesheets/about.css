@@ -137,9 +137,9 @@ body {
         border: 2px solid rgba(194, 194, 194, 0.685);
         border-radius: 7px;
         box-shadow: -3px -3px 2px rgba(105, 105, 105, 0.733);
-        width: 40%;
-        height: 30%;
-        bottom: -83px;
+        width: 30%;
+        height: 20%;
+        bottom: 217px;
         text-align: center;
     }
 }
