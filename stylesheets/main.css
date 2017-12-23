@@ -99,13 +99,18 @@ a img {
         color: black;
     }
 
-    .map-link {
-        margin-top: 3px;
+    .logout-link {
         padding-left: 5px;
-        padding-right: 20px;
+        padding-right: 25px;
+        margin-top: 5px;
         border-top: 2px solid #5b5b5b;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+    }
+
+    .map-link {
+        padding-left: 5px;
+        padding-right: 20px;
     }
 
     .about-link {
