@@ -56,8 +56,8 @@ section {
 }
 
 .form-container {
-    height: 330px;
-    width: 300px;
+    height: 375px;
+    width: 325px;
     border: solid 2px rgb(215, 215, 215);
     border-radius: 5px;
     box-shadow: 1px 1px 5px 5px hsla(219, 15%, 77%, 0.3);
@@ -83,4 +83,29 @@ section {
     display: block;
     width: 95%;
     border: none;
+}
+
+.btn-primary{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sign-up-link {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.sign-up-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sign-in-link {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.sign-in-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
